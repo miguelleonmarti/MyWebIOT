@@ -1,0 +1,141 @@
+.text-break.text-left.border.rounded.border-dark.float-right {
+}
+
+.text-break.text-left.border.rounded.border-dark.float-right {
+}
+
+#aside {
+    width: 25vw;
+    height: 85vh;
+    margin: 0;
+    padding: 10px;
+    margin-top: 11px;
+    margin-right: 10px;
+}
+
+#firstSection {
+    width: 70vw;
+    height: 44vh;
+    margin: 0;
+    padding: 10px;
+}
+
+#secondSection {
+    width: 70vw;
+    height: 44vh;
+    margin: 0;
+    padding: 10px;
+}
+
+#nav {
+    height: 10vh;
+    width: 100%;
+}
+
+#logo {
+    margin-right: 10px;
+}
+
+#firstSection > article {
+    width: 100%;
+    height: 100%;
+}
+
+#secondSection > article {
+    width: 100%;
+    height: 100%;
+}
+
+.chartContainer {
+    display: inline;
+    float: left;
+    height: 80%;
+    width: 48%;
+}
+
+#channelListHeader {
+    width: 100%;
+}
+
+#channelListHeader > header {
+    background-color: rgb(52, 58, 64);
+    margin: 10px;
+    padding: 10px;
+}
+
+#channelListHeader > header > h3 {
+    width: 100%;
+    color: rgb(255, 255, 255);
+    margin: 0;
+}
+
+#channelListHeader > section {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+
+
+#newChannelButton {
+    margin: 10px;
+}
+
+#form {
+    background-color: rgb(52, 58, 64);
+    padding: 0;
+    padding-right: 30px;
+    padding-left: 30px;
+    min-width: 260px;
+    max-width: 35%;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+#form > i {
+    width: auto;
+    height: auto;
+    font-size: 71px;
+}
+
+#formSubmit {
+    background-color: rgb(41, 128, 239);
+}
+
+#formCancel {
+    background-color: rgb(113, 120, 129);
+}
+
+#createChannelButton,
+#registerUserButton,
+#sendMessageButton {
+    background-color: rgb(41, 128, 239);
+    padding: 9px;
+    margin-right: 9px;
+}
+
+#cancelCreateChannelButton,
+#cancelMessageButton {
+    background-color: rgb(113, 120, 129);
+    padding: 9px;
+}
+
+#registerDiv {
+    width: 100%;
+    height: 560px;
+}
+
+#loginDiv {
+    width: 100%;
+    height: 384px;
+}
+
+#newChannelDiv {
+    width: 100%;
+    height: 583px;
+}
+
+#supportDiv {
+    width: 100%;
+    height: 475px;
+}
