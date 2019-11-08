@@ -4,7 +4,6 @@
 
 @section('links')
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 <script>
     function getMessage() {
         $.ajax({
@@ -58,12 +57,19 @@
         @if($chart2)<div id="chartContainer2" class="chartContainer">{!! $chart2->container() !!}</div>@endif
     </article>
 </section>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script> <!-- Graphs -->
-<script>
-    getMessage();
-    getChart();
-</script>
-<div id="prueba"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 @if($chart1){!! $chart1->script() !!}@endif
 @if($chart2){!! $chart2->script() !!}@endif
+<script>
+    function refreshCharts() {
+        {{ $chart1->id }}_refresh('/getCharts/1');
+        {{ $chart2->id }}_refresh('/getCharts/2');
+        setTimeout(refreshCharts, 10000);
+    }
+</script>
+<script>
+    getMessage();
+    refreshCharts();
+</script>
 @endsection

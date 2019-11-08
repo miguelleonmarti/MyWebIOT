@@ -23,6 +23,7 @@ class PagesController extends Controller
         $chart1 = null;
         $chart2 = null;
         $index = 0;
+        $api = url('/getCharts');
 
         if (auth()->check()) {
             $id_user = auth()->user()->getAuthIdentifier();
@@ -34,7 +35,9 @@ class PagesController extends Controller
         if (count($canales) > 0) {
             // the user has at least one channel
             foreach ($canales as $canal) {
-                $datosSensor = DatoSensor::all()->where('id_canal', '=', $canal->id);
+                $datosSensor = DatoSensor::where('id_canal', '=', $canal->id)->orderBy('created_at', 'DESC')->limit(10)->get();
+
+                $datosSensor = $datosSensor->reverse();
 
                 foreach ($datosSensor as $dato) {
                     $x[] = $dato->created_at->format('d/m/Y H:i:s');
@@ -42,12 +45,12 @@ class PagesController extends Controller
                 }
 
                 $chart = new ChannelChart();
-                $chart->labels($x);
-                $chart->displaylegend(true);
-                $chart->dataset($canal->nombreCanal, 'line', $y)
-                    ->color("#53c1de")
-                    ->backgroundcolor("#53c1de")
-                    ->fill(false); // true -> filled
+                $chart->labels($x)->load($api);
+                //$chart->displaylegend(true);
+                //$chart->dataset($canal->nombreCanal, 'line', $y)
+                //->color("#53c1de")
+                //->backgroundcolor("#53c1de")
+                //->fill(false); // true -> filled
 
                 if ($index == 0) {
                     $chart1 = $chart;
@@ -60,7 +63,7 @@ class PagesController extends Controller
             }
         }
 
-        return view('/index', ['chart1' => $chart1, 'chart2' => $chart2]);
+        return view('index', ['chart1' => $chart1, 'chart2' => $chart2]);
     }
 
     public function support()
@@ -123,7 +126,8 @@ class PagesController extends Controller
         return redirect()->to('channelList');
     }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $this->validate(request(), [
             'url' => 'required',
             'dato' => 'required'

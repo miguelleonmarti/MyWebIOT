@@ -34,7 +34,7 @@ class AjaxController extends Controller
             'nBytes' => $nBytes), 200);
     }
 
-    public function getCharts() {
+    public function getCharts($id) {
         $x = [];
         $y = [];
         $chart1 = null;
@@ -51,7 +51,9 @@ class AjaxController extends Controller
         if (count($canales) > 0) {
             // the user has at least one channel
             foreach ($canales as $canal) {
-                $datosSensor = DatoSensor::all()->where('id_canal', '=', $canal->id);
+                $datosSensor = DatoSensor::where('id_canal', '=', $canal->id)->orderBy('created_at', 'DESC')->limit(10)->get();
+
+                $datosSensor = $datosSensor->reverse();
 
                 foreach ($datosSensor as $dato) {
                     $x[] = $dato->created_at->format('d/m/Y H:i:s');
@@ -59,12 +61,12 @@ class AjaxController extends Controller
                 }
 
                 $chart = new ChannelChart();
-                $chart->labels($x);
-                $chart->displaylegend(true);
+                //$chart->labels($x);
+                //$chart->displaylegend(true);
                 $chart->dataset($canal->nombreCanal, 'line', $y)
-                    ->color("#53c1de")
+               ->color("#53c1de")
                     ->backgroundcolor("#53c1de")
-                    ->fill(false); // true -> filled
+                    ->fill(false);
 
                 if ($index == 0) {
                     $chart1 = $chart;
@@ -77,9 +79,9 @@ class AjaxController extends Controller
             }
         }
 
-        return response()->json()(array(
-            'chart1' => $chart1,
-            'chart2' => $chart2
-        ), 200);
+        if($id == 1) {
+            return $chart1->api();
+        }
+        return $chart2->api();
     }
 }
