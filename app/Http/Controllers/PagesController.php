@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Canal;
 use App\Charts\ChannelChart;
 use App\DatoSensor;
+use App\Sugerencia;
 use App\User;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,7 +64,11 @@ class PagesController extends Controller
             }
         }
 
-        return view('index', ['chart1' => $chart1, 'chart2' => $chart2]);
+        $canales = Canal::all();
+        $sugerencias = Sugerencia::all();
+        $usuarios = User::all();
+
+        return view('index', ['chart1' => $chart1, 'chart2' => $chart2, 'canales' => $canales, 'sugerencias' => $sugerencias, 'usuarios' => $usuarios]);
     }
 
     public function support()
@@ -93,7 +98,7 @@ class PagesController extends Controller
     public function create(Request $request)
     {
 
-        $id_user = auth()->user()->getAuthIdentifier();
+        $id_user = auth()->user()->getAuthIdentifier(); //TODO: IMPORTANTE
 
         $this->validate(request(), [
             'nombreCanal' => 'required',
@@ -123,7 +128,19 @@ class PagesController extends Controller
     public function destroy($id)
     {
         Canal::destroy($id);
-        return redirect()->to('channelList');
+        return redirect()->to('/');
+    }
+
+    public function destroyUser($id)
+    {
+        User::destroy($id);
+        return redirect()->to('/');
+    }
+
+    public function destroySuggestion($id)
+    {
+        Sugerencia::destroy($id);
+        return redirect()->to('/');
     }
 
     public function update(Request $request)
@@ -141,5 +158,25 @@ class PagesController extends Controller
         ]);
 
         echo "Data stored successfully";
+    }
+
+    public function suggestion(Request $request) {
+        $this->validate(request(), [
+            'name' => 'required',
+            'email' => 'required|email',
+            'message' => 'required'
+        ]);
+
+        Sugerencia::create([
+            'name' => $request->name,
+            'message' => $request->message,
+            'email' => $request->email
+        ]);
+
+        return redirect()->to('/login');
+    }
+
+    public function webService() {
+        return view('webService');
     }
 }

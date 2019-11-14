@@ -18,4 +18,15 @@
 {!! $chart->script() !!}
 @endif
 
+<script>
+    function refresh() {
+        var url = document.URL;
+        var id = url.substr(url.lastIndexOf('/') + 1);
+        {{ $chart->id }}_refresh(`/refresh/${id}`);
+        setTimeout(refresh, 5000);
+    }
+
+    refresh();
+</script>
+
 @endsection

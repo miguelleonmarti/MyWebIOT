@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Sugerencia;
 
 class AjaxController extends Controller
 {
@@ -17,6 +18,8 @@ class AjaxController extends Controller
         $nCanales = Canal::count();
         // number of 'canales' on the database
         $nUsers = User::count();
+        // number of 'sugerencias' on the database
+        $nSugerencias = Sugerencia::count();
         // retrieving all the data on the database in order to figure out the bytes stored
         $result = DB::select('SHOW TABLE STATUS');
         // counter variable
@@ -31,6 +34,7 @@ class AjaxController extends Controller
         return response()->json(array(
             'nUsers' => $nUsers,
             'nCanales' => $nCanales,
+            'nSugerencias' => $nSugerencias,
             'nBytes' => $nBytes), 200);
     }
 

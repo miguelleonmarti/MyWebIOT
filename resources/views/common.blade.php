@@ -32,7 +32,7 @@
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav">
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="/channelList">Canales</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link active" href="/support">Ayuda</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link active" href="/support">Atención al Cliente</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="#">Contacto</a></li>
                         <!-- Changes the href of channels if logged in -->
                     </ul>
