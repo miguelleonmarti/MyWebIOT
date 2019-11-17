@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" id="formSubmit">Log In</button>
-            <button class="btn btn-primary btn-block" type="submit" id="formCancel">Cancel</button>
+            <button class="btn btn-primary btn-block" type="reset" id="formCancel">Cancel</button>
         </div>
         <a class="forgot" href="#">Forgot your email or password?</a>
     </form>

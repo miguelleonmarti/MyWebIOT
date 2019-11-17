@@ -35,7 +35,7 @@
         </div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit" id="registerUserButton">Create account</button>
-            <button class="btn btn-primary btn-block" type="submit" id="cancelMessageButton">Cancel</button>
+            <button class="btn btn-primary btn-block" type="reset" id="cancelMessageButton">Cancel</button>
         </div>
         <a class="forgot" href="#">You already have an account? Log in here.</a>
     </form>
