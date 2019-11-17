@@ -78,7 +78,14 @@
     }
     refreshCharts();
 </script>
-
+@elseif($chart1 != null)
+<script>
+    function refreshCharts() {
+        {{ $chart1->id }}_refresh('/getCharts/1');
+        setTimeout(refreshCharts, 10000);
+    }
+    refreshCharts();
+</script>
 @endif
 
 <script>
