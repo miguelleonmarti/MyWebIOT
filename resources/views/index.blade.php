@@ -69,21 +69,27 @@
 @if($chart1){!! $chart1->script() !!}@endif
 @if($chart2){!! $chart2->script() !!}@endif
 
-@if($chart1 != null)
+@if($chart1 != null && $chart2 != null)
 <script>
     function refreshCharts() {
-
         {{ $chart1->id }}_refresh('/getCharts/1');
         {{ $chart2->id }}_refresh('/getCharts/2');
-
         setTimeout(refreshCharts, 10000);
     }
+    refreshCharts();
+</script>
+@elseif($chart1 != null)
+<script>
+    function refreshCharts() {
+        {{ $chart1->id }}_refresh('/getCharts/1');
+        setTimeout(refreshCharts, 10000);
+    }
+    refreshCharts();
 </script>
 @endif
 
 <script>
     getMessage();
-    refreshCharts();
 </script>
 
 <!-- EXAMEN EJERCICIO 4 -->
@@ -161,7 +167,7 @@
         @foreach ($sugerencias as $sugerencia)
         <article class="border rounded border-dark" style="margin-bottom: 10px;">
             <header>
-            <form action="suggestionList/{{ $usuario->id }}" method="POST" style="all:unset;">
+            <form action="suggestionList/{{ $sugerencia->id }}" method="POST" style="all:unset;">
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger border rounded float-right" type="submit">
