@@ -4,6 +4,16 @@
 
 @section('body')
 
+@if ($errors->any())
+<div class="alert alert-danger">
+    <ul>
+        @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+
 <div class="d-xl-flex login-dark" id="loginDiv">
     <form action="/login" id="form" class="text-center border rounded" method="POST">
         @csrf
