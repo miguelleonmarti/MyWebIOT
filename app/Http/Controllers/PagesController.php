@@ -66,7 +66,7 @@ class PagesController extends Controller
 
         $canales = Canal::all();
         $sugerencias = Sugerencia::all();
-        $usuarios = User::all();
+        $usuarios = User::where('email', '!=', 'admin@admin.com')->get();
 
         return view('index', ['chart1' => $chart1, 'chart2' => $chart2, 'canales' => $canales, 'sugerencias' => $sugerencias, 'usuarios' => $usuarios]);
     }

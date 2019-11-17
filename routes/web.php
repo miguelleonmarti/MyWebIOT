@@ -16,7 +16,7 @@ Route::get('/', 'PagesController@index');
 
 Route::post('/getStats', 'AjaxController@getStats');
 
-Route::get('getCharts/{id}', 'AjaxController@getCharts');
+Route::get('/getCharts/{id}', 'AjaxController@getCharts');
 
 Route::get('/support', 'PagesController@support');
 
