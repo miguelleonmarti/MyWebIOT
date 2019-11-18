@@ -14,6 +14,7 @@
                 $("#nUsers").html(data.nUsers);
                 $("#nSugerencias").html(data.nSugerencias);
                 $("#nCanales").html(data.nCanales);
+                $("#nProductos").html(data.nProductos);
                 $("#nBytes").html(data.nBytes);
             }
         });
@@ -32,9 +33,12 @@
     <p>Número de usuarios: <span id="nUsers"></span></p>
     <p>Número de canales: <span id="nCanales"></span></p>
     <p>Número de sugerencias: <span id="nSugerencias"></span></p>
+    <p>Número de productos: <span id="nProductos"></span></p>
     <p>Número de bytes almacenados: <span id="nBytes"></span> KB</p>
 </aside>
-<aside style="all: unset; float: left; border: 2px solid black; border-radius: 10px; padding: 10px; margin-left: 10px; margin-top: 10px; background: #53c1de;" witdh="20%">
+<aside
+    style="all: unset; float: left; border: 2px solid black; border-radius: 10px; padding: 10px; margin-left: 10px; margin-top: 10px; background: #53c1de;"
+    witdh="20%">
     <ul class="nav navbar-nav">
         <li class="nav-item" role="presentation"><a class="nav-link active" href="/channelList">Canales</a></li>
         <li class="nav-item" role="presentation"><a class="nav-link active" href="/support">Atención al Cliente</a></li>
@@ -105,7 +109,7 @@
 <!-- EXAMEN EJERCICIO 4 -->
 
 @if(auth()->check())
-@if (auth()->user()->getAuthIdentifier() == 18)
+@if (auth()->user()->getAuthIdentifier() == 1)
 
 <div class="text-center login-dark" id="channelListHeader">
     <header class="border rounded">
@@ -116,13 +120,14 @@
         @foreach ($usuarios as $usuario)
         <article class="border rounded border-dark" style="margin-bottom: 10px;">
             <header>
-            <form action="userList/{{ $usuario->id }}" method="POST" style="all:unset;">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger border rounded float-right" type="submit">
-                    <i class="material-icons d-xl-flex justify-content-xl-center" style="color: rgb(255,255,255);">delete</i>
-                </button>
-            </form>
+                <form action="userList/{{ $usuario->id }}" method="POST" style="all:unset;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger border rounded float-right" type="submit">
+                        <i class="material-icons d-xl-flex justify-content-xl-center"
+                            style="color: rgb(255,255,255);">delete</i>
+                    </button>
+                </form>
 
             </header>
             <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Nombre: {{ $usuario->nombre }}</p>
@@ -142,13 +147,14 @@
         @foreach ($canales as $canal)
         <article class="border rounded border-dark" style="margin-bottom: 10px;">
             <header>
-            <form action="channelList/{{ $canal->id }}" method="POST" style="all:unset;">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger border rounded float-right" type="submit">
-                    <i class="material-icons d-xl-flex justify-content-xl-center" style="color: rgb(255,255,255);">delete</i>
-                </button>
-            </form>
+                <form action="channelList/{{ $canal->id }}" method="POST" style="all:unset;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger border rounded float-right" type="submit">
+                        <i class="material-icons d-xl-flex justify-content-xl-center"
+                            style="color: rgb(255,255,255);">delete</i>
+                    </button>
+                </form>
 
             </header>
             <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Nombre canal: {{ $canal->nombreCanal }}</p>
@@ -167,22 +173,75 @@
         @foreach ($sugerencias as $sugerencia)
         <article class="border rounded border-dark" style="margin-bottom: 10px;">
             <header>
-            <form action="suggestionList/{{ $sugerencia->id }}" method="POST" style="all:unset;">
-                @csrf
-                @method('DELETE')
-                <button class="btn btn-danger border rounded float-right" type="submit">
-                    <i class="material-icons d-xl-flex justify-content-xl-center" style="color: rgb(255,255,255);">delete</i>
-                </button>
-            </form>
+                <form action="suggestionList/{{ $sugerencia->id }}" method="POST" style="all:unset;">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger border rounded float-right" type="submit">
+                        <i class="material-icons d-xl-flex justify-content-xl-center"
+                            style="color: rgb(255,255,255);">delete</i>
+                    </button>
+                </form>
 
             </header>
             <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Nombre: {{ $sugerencia->name }}</p>
             <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Email: {{ $sugerencia->email }}</p>
-            <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Sugerencia: {{ $sugerencia->message }}<br></p>
+            <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Sugerencia: {{ $sugerencia->message }}<br>
+            </p>
         </article>
         @endforeach
         @endif
     </section>
+</div>
+
+<div class="text-center login-dark" id="channelListHeader">
+        <header class="border rounded">
+            <h3>Listado de todos los productos</h3>
+        </header>
+        <section>
+            @if (isset($productos))
+            @foreach ($productos as $producto)
+            <article class="border rounded border-dark" style="margin-bottom: 10px;">
+                <header>
+                    <form action="productList/{{ $producto->id }}" method="POST" style="all:unset;">
+                        @csrf
+                        @method('DELETE')
+                        <button class="btn btn-danger border rounded float-right" type="submit">
+                            <i class="material-icons d-xl-flex justify-content-xl-center"
+                                style="color: rgb(255,255,255);">delete</i>
+                        </button>
+                    </form>
+
+                </header>
+                <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Nombre: {{ $producto->nombre }}</p>
+                <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Descripción: {{ $producto->descripcion }}</p>
+                <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Precio: {{ $producto->precio }} euros<br></p>
+                <a href="/product/{{ $producto->id }}">Editar producto</a>
+            </article>
+            @endforeach
+            @endif
+        </section>
+    </div>
+
+<div class="d-xl-flex login-dark" id="newChannelDiv">
+    <form action="/newProduct" class="text-center border rounded" method="POST" id="form">
+        @csrf
+        <i class="material-icons">add_circle_outline</i>
+        <div class="form-group">
+            <input class="form-control" type="text" id="nombre" name="nombre" placeholder="Nombre del producto"
+                required>
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" rows="auto" id="descripcion" name="descripcion" placeholder="Descripción..."
+                required></textarea>
+        </div>
+        <div class="form-group">
+            <input class="form-control" type="number" id="precio" name="precio" placeholder="Precio" required>
+        </div>
+        <div class="form-group text-center">
+            <button class="btn btn-primary btn-block" type="submit" id="createChannelButton">Crear producto</button>
+            <button class="btn btn-primary btn-block" type="submit" id="cancelCreateChannelButton">Cancelar</button>
+        </div>
+    </form>
 </div>
 
 @endif

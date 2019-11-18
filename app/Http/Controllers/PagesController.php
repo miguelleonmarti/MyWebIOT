@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Canal;
 use App\Charts\ChannelChart;
 use App\DatoSensor;
+use App\Producto;
 use App\Sugerencia;
 use App\User;
 use Illuminate\Support\Facades\DB;
@@ -67,8 +68,9 @@ class PagesController extends Controller
         $canales = Canal::all();
         $sugerencias = Sugerencia::all();
         $usuarios = User::where('email', '!=', 'admin@admin.com')->get();
+        $productos = Producto::all();
 
-        return view('index', ['chart1' => $chart1, 'chart2' => $chart2, 'canales' => $canales, 'sugerencias' => $sugerencias, 'usuarios' => $usuarios]);
+        return view('index', ['chart1' => $chart1, 'chart2' => $chart2, 'canales' => $canales, 'sugerencias' => $sugerencias, 'usuarios' => $usuarios, 'productos' => $productos]);
     }
 
     public function support()
@@ -125,6 +127,23 @@ class PagesController extends Controller
         return redirect()->to('/channelList');
     }
 
+    public function createProduct(Request $request)
+    {
+        $this->validate(request(), [
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required|numeric'
+        ]);
+
+        Producto::create([
+            'nombre' => $request->nombre,
+            'descripcion' => $request->descripcion,
+            'precio' => $request->precio
+        ]);
+
+        return redirect()->to('/');
+    }
+
     public function destroy($id)
     {
         Canal::destroy($id);
@@ -140,6 +159,12 @@ class PagesController extends Controller
     public function destroySuggestion($id)
     {
         Sugerencia::destroy($id);
+        return redirect()->to('/');
+    }
+
+    public function destroyProduct($id)
+    {
+        Producto::destroy($id);
         return redirect()->to('/');
     }
 

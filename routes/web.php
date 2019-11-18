@@ -28,9 +28,13 @@ Route::delete('/userList/{id}', 'PagesController@destroyUser');
 
 Route::delete('/suggestionList/{id}', 'PagesController@destroySuggestion');
 
+Route::delete('/productList/{id}', 'PagesController@destroyProduct');
+
 Route::get('/newChannel', 'PagesController@newChannel');
 
 Route::post('/newChannel', 'PagesController@create');
+
+Route::post('/newProduct', 'PagesController@createProduct');
 
 Route::get('/indexWebService', 'PagesController@webService');
 
@@ -50,7 +54,9 @@ Route::get('/logout', 'SessionsController@destroy');
 
 // Chart Controller
 
-Route::get('/chart/{id}', 'ChartController@index'); //prueba
+Route::get('/chart/{id}', 'ChartController@index');
+
+Route::get('/product/{id}', 'ChartController@productUpdate');
 
 Route::get('/refresh/{id}', 'ChartController@refresh');
 

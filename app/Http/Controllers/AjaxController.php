@@ -9,6 +9,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests;
+use App\Producto;
 use App\Sugerencia;
 
 class AjaxController extends Controller
@@ -22,6 +23,8 @@ class AjaxController extends Controller
         $nSugerencias = Sugerencia::count();
         // retrieving all the data on the database in order to figure out the bytes stored
         $result = DB::select('SHOW TABLE STATUS');
+        // number of 'productos' on the database
+        $nProductos = Producto::count();
         // counter variable
         $nBytes = 0;
         // iterating the array and getting bytes of each element
@@ -35,6 +38,7 @@ class AjaxController extends Controller
             'nUsers' => $nUsers,
             'nCanales' => $nCanales,
             'nSugerencias' => $nSugerencias,
+            'nProductos' => $nProductos,
             'nBytes' => $nBytes), 200);
     }
 

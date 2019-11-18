@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Canal;
 use App\Charts\ChannelChart;
 use App\DatoSensor;
+use App\Producto;
 
 class ChartController extends Controller
 {
@@ -63,5 +64,10 @@ class ChartController extends Controller
             ->backgroundcolor("#53c1de")
             ->fill(false); // true -> filled
         return $chart->api();
+    }
+
+    public function productUpdate($id) {
+        $producto = Producto::where('id', '=', $id)->get();
+        return view('producto', ['producto' => $producto]);
     }
 }
