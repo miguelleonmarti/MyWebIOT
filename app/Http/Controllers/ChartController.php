@@ -6,6 +6,7 @@ use App\Canal;
 use App\Charts\ChannelChart;
 use App\DatoSensor;
 use App\Producto;
+use Illuminate\Http\Request;
 
 class ChartController extends Controller
 {
@@ -67,7 +68,18 @@ class ChartController extends Controller
     }
 
     public function productUpdate($id) {
-        $producto = Producto::where('id', '=', $id)->get();
-        return view('producto', ['producto' => $producto]);
+        $producto = Producto::all()->where('id', '=', $id)->first();
+        return view('producto')->with('producto', $producto);
+    }
+
+    public function update(Request $request, $id) {
+        $this->validate(request(), [
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'precio' => 'required|numeric'
+        ]);
+
+        Producto::where('id', '=', $id)->update(['nombre' => $request->nombre, 'descripcion' => $request->descripcion, 'precio' => $request->precio]);
+        return redirect('/');
     }
 }

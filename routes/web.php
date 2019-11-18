@@ -58,6 +58,8 @@ Route::get('/chart/{id}', 'ChartController@index');
 
 Route::get('/product/{id}', 'ChartController@productUpdate');
 
+Route::put('/productUpdate/{id}', 'ChartController@update');
+
 Route::get('/refresh/{id}', 'ChartController@refresh');
 
 // update
