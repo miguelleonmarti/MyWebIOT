@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\SocialController;
+
 Route::post('/suggestion', 'PagesController@suggestion');
 
 Route::get('/', 'PagesController@index');
@@ -46,7 +49,7 @@ Route::post('/register', 'RegistrationController@store');
 
 // Session Controller
 
-Route::get('/login', 'SessionsController@create');
+Route::get('/login', ['as' => 'login', 'uses' => 'SessionsController@create']);
 
 Route::post('/login', 'SessionsController@store');
 
@@ -69,3 +72,51 @@ Route::post('/update', 'PagesController@update');
 Route::get('/webService', 'WebServiceController@index');
 
 Route::get('/webService2/{day}/{month}/{year}', 'WebServiceController@index2');
+
+// BuyController
+
+Route::get('/buyProduct', 'BuyController@create');
+
+// SocialController
+
+Route::get('/social', 'SocialController@create');
+
+Route::post('/social', 'SocialController@getMessages');
+
+Route::get('/newMessage', 'SocialController@createMessage');
+
+Route::post('/newMessage', 'SocialController@newMessage');
+
+// FollowerController
+
+Route::get('/friends', 'FollowerController@create');
+
+// ProfileController
+
+Route::get('/profile', 'ProfileController@create');
+
+// MemberController
+
+Route::get('/members', 'MemberController@create');
+
+Route::get('/membersChannels', 'MemberController@createMembersChannels');
+
+Route::post('/membersChannels', 'MemberController@getChannels');
+
+Route::post('/follow/{id}', 'MemberController@follow');
+
+Route::delete('/unfollow/{id}', 'MemberController@unfollow');
+
+// WebstoreController: cart
+
+Route::delete('/remove', 'WebstoreController@removeFromCart');
+
+Route::post('/add/{id}', 'WebstoreController@addToCart');
+
+Route::delete('/destroy', 'WebstoreController@destroyCart');
+
+// PaypalController
+
+Route::get('/checkout', 'PaypalController@payWithpaypal');
+
+Route::get('/status', 'PaypalController@getPaymentStatus');

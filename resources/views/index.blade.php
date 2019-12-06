@@ -26,6 +26,26 @@
 
 @section('body')
 
+<div class="container">
+        @if(Session::has('success'))
+        <div class="alert alert-success">
+            {{ Session::get('success') }}
+            @php
+            Session::forget('success');
+            @endphp
+        </div>
+        @endif
+
+        @if ($errors->any())
+        <div class="alert alert-warning" uk-alert>
+            {{ Session::get('error') }}
+            @php
+            Session::forget('error');
+            @endphp
+        </div>
+        @endif
+</div>
+
 <aside class="text-break text-left border rounded border-dark float-right" id="aside">
     <header>
         <h4>Información actualizada de los datos almacenados en la base de datos (al menos los siguientes):</h4>
@@ -49,7 +69,7 @@
 <section id="firstSection" style="margin-left: 270px;">
     <article class="text-center border rounded border-dark">
         <header>
-            <h2>MiWebIoT</h2>
+            <h2>Escuela de Ing. de Telecomunicación y Electrónica</h2>
         </header>
         <p>Esto es una página web que estamos diseñando en la práctica de Programación Web.</p>
 
@@ -235,7 +255,7 @@
                 required></textarea>
         </div>
         <div class="form-group">
-            <input class="form-control" type="number" id="precio" name="precio" placeholder="Precio" required>
+            <input class="form-control" type="number" step="0.01" id="precio" name="precio" placeholder="Precio" required>
         </div>
         <div class="form-group text-center">
             <button class="btn btn-primary btn-block" type="submit" id="createChannelButton">Crear producto</button>
