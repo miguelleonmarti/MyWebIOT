@@ -15,11 +15,12 @@ class SocialController extends Controller
 
     public function create()
     {
-        return view('social');
+        $user = User::find(auth()->user()->getAuthIdentifier());
+        return view('social')->with('user', $user);
     }
 
     public function getMessages() {
-        $mensajes = Message::orderBy('created_at', 'DESC')->limit(5)->get();
+        $mensajes = Message::where('privado', '=', 0)->orderBy('created_at', 'DESC')->limit(5)->get();
         return response()->json(array('mensajes' => $mensajes), 200);
     }
 

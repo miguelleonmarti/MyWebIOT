@@ -95,6 +95,8 @@ Route::get('/friends', 'FollowerController@create');
 
 Route::get('/profile', 'ProfileController@create');
 
+Route::post('/profile', 'ProfileController@update');
+
 // MemberController
 
 Route::get('/members', 'MemberController@create');

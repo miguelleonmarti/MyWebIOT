@@ -14,7 +14,15 @@ class ProfileController extends Controller
 
     public function create()
     {
-        $user = User::where('id', '=', auth()->user()->getAuthIdentifier())->first();
+        $user = User::find(auth()->user()->getAuthIdentifier());
         return view('profile')->with('user', $user);
+    }
+
+    public function update(Request $request) {
+        $user = User::find(auth()->user()->getAuthIdentifier());
+        $user->nombre = $request->nombre;
+        $user->estado = $request->estado;
+        $user->save();
+        return redirect()->to('/profile');
     }
 }

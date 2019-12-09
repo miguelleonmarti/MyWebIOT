@@ -27,7 +27,7 @@
             }
         });
 
-        setTimeout(getMessages, 2000);
+        setTimeout(getMessages, 2000); // cada 2 segundos obtengo todos los mensajes
     }
 
     getMessages();
@@ -45,8 +45,10 @@
                 <div class="card-header">Mi perfil</div>
                 <div class="card-body">
                     <i class="material-icons text-center" style="font-size: 100px;">person</i>
+                    <h5 class="card-title">Mi nombre</h5>
+                    <p class="card-text">{{ $user->nombre }}</p>
                     <h5 class="card-title">Mi estado</h5>
-                    <p class="card-text">Aquí en el laboratorio</p>
+                    <p class="card-text">{{ $user->estado }}</p>
                 </div>
             </div>
         </div>
@@ -54,7 +56,7 @@
             <a href="/members" role="button" class="btn btn-outline-primary btn-lg btn-block">Miembros</a>
             <a href="/friends" role="button" class="btn btn-outline-primary btn-lg btn-block">Amigos</a>
             <a href="/newMessage" role="button" class="btn btn-outline-primary btn-lg btn-block">Mensajes</a>
-            <a href="/channelList" role="button" class="btn btn-outline-primary btn-lg btn-block">Canales</a>
+            <a href="/membersChannels" role="button" class="btn btn-outline-primary btn-lg btn-block">Canales</a>
             <a href="/profile" role="button" class="btn btn-outline-primary btn-lg btn-block">Perfil</a>
         </div>
     </div>
