@@ -35,6 +35,9 @@
                     <button type="submit"
                         class="btn btn-lg btn-outline-primary btn-block align-self-center mt-auto">Comprar</button>
                 </form>
+                @else
+                <button type="submit"
+                        class="btn btn-lg btn-outline-primary btn-block align-self-center mt-auto" disabled>Comprar</button>
                 @endif
 
             </div>

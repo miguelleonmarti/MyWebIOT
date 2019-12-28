@@ -115,6 +115,8 @@ Route::delete('/remove', 'WebstoreController@removeFromCart');
 
 Route::post('/add/{id}', 'WebstoreController@addToCart');
 
+Route::post('/minus/{id}/{rowId}', 'WebstoreController@minus');
+
 Route::delete('/destroy', 'WebstoreController@destroyCart');
 
 // PaypalController

@@ -56,7 +56,9 @@
                         @endif
 
                         <li class="nav-item d-lg-flex align-items-lg-center" data-toggle="modal"
-                            data-target="#shoppingCartModal" role="presentation"><i class="material-icons" style="display: inline; color: rgb(255,255,255); font-size: 24px; padding: 8px;">shopping_cart</i></li>
+                            data-target="#shoppingCartModal" role="presentation"><i class="material-icons"
+                                style="display: inline; color: rgb(255,255,255); font-size: 24px; padding: 8px;">shopping_cart</i>
+                        </li>
 
                         <div class="modal fade" id="shoppingCartModal" tabindex="-1" role="dialog"
                             aria-labelledby="shoppingCartModalTitle" aria-hidden="true">
@@ -93,7 +95,19 @@
                                                         </form>
                                                     </td>
                                                     <td>{{ $cartItem->name }}</td>
-                                                    <td>{{ $cartItem->qty }}</td>
+                                                    <td>
+                                                        <form style='display: inline;' action="/minus/{{$cartItem->id}}/{{$cartItem->rowId}}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <button type="submit">-</button>
+                                                        </form>
+                                                        {{ $cartItem->qty }}
+                                                        <form style='display: inline;' action="/add/{{$cartItem->id}}"
+                                                            method="POST">
+                                                            @csrf
+                                                            <button type="submit">+</button>
+                                                        </form>
+                                                    </td>
                                                     <td>${{ number_format($cartItem->price, 2) }}</td>
                                                     <td>${{ number_format($cartItem->price * $cartItem->qty, 2) }}</td>
                                                 </tr>

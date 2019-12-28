@@ -26,12 +26,22 @@ class WebstoreController extends Controller
         return redirect('/buyProduct');
     }
 
-    public function increase() {
+    public function minus($id, $rowId) {
+        $producto = Producto::find($id);
+        $cantidad = 0;
+        foreach (\Cart::content() as $cartItem) {
+            if ($cartItem->name == $producto->nombre) {
+                $cantidad = $cartItem->qty;
+            }
+        }
 
-    }
+        if ($cantidad == 1) {
+            \Cart::remove($rowId);
+        } else {
+            \Cart::add($producto->id, $producto->nombre, -1, $producto->precio);
+        }
 
-    public function decrease() {
-
+        return redirect('/buyProduct');
     }
 
     # Our function for removing a certain product from the cart
