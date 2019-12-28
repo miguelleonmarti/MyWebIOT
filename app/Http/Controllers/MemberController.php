@@ -21,22 +21,32 @@ class MemberController extends Controller
         $email = User::where('id', '=', auth()->user()->getAuthIdentifier())->first()->email;
         $followers = Follower::where('following', '=', $email)->pluck('follower')->toArray();
         $followings = Follower::select('following')->where('follower', '=', $email)->pluck('following')->toArray();
-        return view('members')->with('members', $members)->with('followers', $followers)->with('followings', $followings);
+
+        return view('members')
+            ->with('members', $members)
+            ->with('followers', $followers)
+            ->with('followings', $followings);
     }
 
-    public function createMembersChannels() {
+    public function createMembersChannels()
+    {
         $email = User::where('id', '=', auth()->user()->getAuthIdentifier())->first()->email;
         $followings = Follower::select('following')->where('follower', '=', $email)->pluck('following')->toArray();
-        return view('memberChannels')->with('followings', $followings);
+        $channels = Canal::where('id_user', '=', auth()->user()->getAuthIdentifier())->get();
+        return view('memberChannels')
+            ->with('followings', $followings)
+            ->with('channels', $channels);
     }
 
-    public function getChannels(Request $request) {
+    public function getChannels(Request $request)
+    {
         $userId = User::where('email', '=', $request->email)->first()->id;
         $channels = Canal::where('id_user', '=', $userId)->get();
         return response()->json(array('channels' => $channels), 200);
     }
 
-    public function follow(Request $request) {
+    public function follow(Request $request)
+    {
         $follower = new Follower;
         $follower->follower = User::where('id', '=', auth()->user()->getAuthIdentifier())->first()->email;
         $follower->following = User::where('id', '=', $request->id)->first()->email;
@@ -44,7 +54,8 @@ class MemberController extends Controller
         return redirect()->to('/members');
     }
 
-    public function unfollow(Request $request) {
+    public function unfollow(Request $request)
+    {
         $follower = User::where('id', '=', auth()->user()->getAuthIdentifier())->first()->email;
         $following = User::where('id', '=', $request->id)->first()->email;
         $unfollow = Follower::where('follower', '=', $follower)->where('following', '=', $following)->first();

@@ -13,12 +13,17 @@
                 <i class="material-icons" style="font-size: 100px;">person_outline</i>
                 <div class="form-group mt-3">
                     <label>Nombre</label>
-                    <input class="form-control" type="text" id="nombre" name="nombre" placeholder="{{ $user->nombre }}"
+                    <input class="form-control" type="text" id="nombre" name="nombre" value="{{ $user->nombre }}"
                         required>
                 </div>
                 <div class="form-group mt-3">
                     <label>Estado</label>
-                    <input class="form-control" type="text" id="estado" name="estado" placeholder="{{ $user->estado }}"
+                    <input class="form-control" type="text" id="estado" name="estado" value="{{ $user->estado }}"
+                        required>
+                </div>
+                <div class="form-group mt-3">
+                    <label>Imagen</label>
+                    <input class="form-control" type="text" id="imagen" name="imagen" value="{{ $user->imagen }}"
                         required>
                 </div>
                 <div class="form-group text-center">

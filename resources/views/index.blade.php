@@ -234,6 +234,7 @@
                 </header>
                 <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Nombre: {{ $producto->nombre }}</p>
                 <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Descripción: {{ $producto->descripcion }}</p>
+                <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Cantidad: {{ $producto->cantidad }}</p>
                 <p class="text-left" style="margin: 10px;margin-bottom: 10px;">Precio: {{ $producto->precio }} euros<br></p>
                 <a href="/product/{{ $producto->id }}">Editar producto</a>
             </article>
@@ -255,7 +256,11 @@
                 required></textarea>
         </div>
         <div class="form-group">
-            <input class="form-control" type="number" step="0.01" id="precio" name="precio" placeholder="Precio" required>
+                <input class="form-control" type="number" min="0" max="2147483647" id="cantidad" name="cantidad" placeholder="Cantidad..."
+                    required></input>
+            </div>
+        <div class="form-group">
+            <input class="form-control" type="number" min="0" max="2147483647" step="0.01" id="precio" name="precio" placeholder="Precio" required>
         </div>
         <div class="form-group text-center">
             <button class="btn btn-primary btn-block" type="submit" id="createChannelButton">Crear producto</button>

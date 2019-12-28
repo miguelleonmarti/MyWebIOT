@@ -21,6 +21,7 @@ use Session;
 use URL;
 use App\Invoice;
 use App\Order;
+use App\Producto;
 use App\Suborder;
 use Str;
 use Request;
@@ -155,6 +156,14 @@ class PaypalController extends Controller
                 $suborder->quantity = $item->qty;
                 $suborder->save();
             }
+
+            // decrementar el stock de los productos comprados
+            foreach (Cart::content() as $item) {
+                $producto = Producto::find($item->id);
+                $producto['cantidad'] -= $item->qty;
+                $producto->save();
+            }
+
             Cart::destroy();
             Session::put('success', 'Your payment was successful. Thank you.');
             return Redirect::to('/');

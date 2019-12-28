@@ -20,7 +20,7 @@
                             content += '<i class="material-icons" style="display: inline;">lock_outline</i>';
 
                             content += '<h6 style="display: inline;"><strong>' + message.emisor + ' >>> ' + message.receptor + '</strong></h6></br>';
-                            content +=  '<p><i>"' + message.texto + '" a las' + message.created_at + '</i></p>';
+                            content +=  '<p><i>"' + message.texto + '" a las ' + message.created_at + '</i></p>';
                     });
                 $('#messages').html(content);
 
@@ -44,7 +44,7 @@
             <div class="card">
                 <div class="card-header">Mi perfil</div>
                 <div class="card-body">
-                    <i class="material-icons text-center" style="font-size: 100px;">person</i>
+                    <img class="rounded-circle m-auto" src="{{ $user->imagen }}" alt="No tienes imagen de perfil" width="100" height="100">
                     <h5 class="card-title">Mi nombre</h5>
                     <p class="card-text">{{ $user->nombre }}</p>
                     <h5 class="card-title">Mi estado</h5>

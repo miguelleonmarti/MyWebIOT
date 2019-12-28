@@ -26,6 +26,9 @@
             <textarea class="form-control" rows="auto" id="descripcion" name="descripcion" required>{{ $producto->descripcion }}</textarea>
         </div>
         <div class="form-group">
+                <input class="form-control" min="0" type="number" id="cantidad" name="cantidad" value="{{ $producto->cantidad }}" required>
+            </div>
+        <div class="form-group">
             <input class="form-control" type="text" id="precio" name="precio" value="{{ $producto->precio }}" required>
         </div>
         <div class="form-group text-center">

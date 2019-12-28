@@ -79,7 +79,7 @@ class ChartController extends Controller
             'precio' => 'required|numeric'
         ]);
 
-        Producto::where('id', '=', $id)->update(['nombre' => $request->nombre, 'descripcion' => $request->descripcion, 'precio' => $request->precio]);
+        Producto::where('id', '=', $id)->update(['nombre' => $request->nombre, 'descripcion' => $request->descripcion, 'cantidad' => $request->cantidad, 'precio' => $request->precio]);
         return redirect('/');
     }
 }

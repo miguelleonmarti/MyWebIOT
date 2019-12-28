@@ -6,7 +6,6 @@
 
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script>
-
     function getChannels() {
 
         $.ajax({
@@ -17,7 +16,7 @@
                 let content = '';
                 console.log(data.channels);
                 data.channels.forEach(element => {
-                    content += `<div class="card">
+                    content += `<div class="card mb-3">
                         <div class="card-body">
                             <h2><a href="/chart/${element.id}">${element.nombreCanal}</a></h2>
                         </div>
@@ -34,12 +33,36 @@
 
 @section('body')
 
-<div class="container mt-3">
+<div class="container mt-3 mb-3">
+
     <div class="row">
         <div class="col">
 
+            <div class="card mt-3">
+                <div class="card-header">Mis canales</div>
+                <div class="card-body">
+
+                    @foreach ($channels as $channel)
+
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h2><a href="/chart/{{ $channel->id }}">{{ $channel->nombreCanal }}</a></h2>
+                        </div>
+                    </div>
+
+                    @endforeach
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+
             <select id="select" name="selected" class="form-control">
-                <option value="" selected>Destinatario</option>
+                <option value="" selected>Canales de ...</option>
                 @foreach ($followings as $following)
                 <option value="{{ $following }}" onclick="getChannels()">{{ $following }}</option>
                 @endforeach

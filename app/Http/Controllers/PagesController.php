@@ -132,12 +132,14 @@ class PagesController extends Controller
         $this->validate(request(), [
             'nombre' => 'required',
             'descripcion' => 'required',
+            'cantidad' => 'required|numeric',
             'precio' => 'required|numeric'
         ]);
 
         Producto::create([
             'nombre' => $request->nombre,
             'descripcion' => $request->descripcion,
+            'cantidad' => $request->cantidad,
             'precio' => $request->precio
         ]);
 

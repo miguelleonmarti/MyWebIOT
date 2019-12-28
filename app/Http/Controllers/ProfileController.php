@@ -22,7 +22,8 @@ class ProfileController extends Controller
         $user = User::find(auth()->user()->getAuthIdentifier());
         $user->nombre = $request->nombre;
         $user->estado = $request->estado;
+        $user->imagen = $request->imagen;
         $user->save();
-        return redirect()->to('/profile');
+        return redirect()->to('/social');
     }
 }
