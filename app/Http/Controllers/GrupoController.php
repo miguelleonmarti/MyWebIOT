@@ -6,6 +6,7 @@ use App\Follower;
 use App\Grupo;
 use App\Message;
 use App\User;
+use App\UsuarioGrupo;
 use Illuminate\Http\Request;
 
 class GrupoController extends Controller
@@ -27,7 +28,6 @@ class GrupoController extends Controller
         if (Grupo::where('nombre', $request->nombre)->first() == null) {
             $grupo = new Grupo();
             $grupo['id_creador'] = auth()->user()->getAuthIdentifier();
-            $grupo['id_invitado'] = auth()->user()->getAuthIdentifier();
             $grupo['nombre'] = $request->nombre;
             $grupo->save();
         }
@@ -49,13 +49,15 @@ class GrupoController extends Controller
             'grupo' => 'required'
         ]);
 
-        $grupo = new Grupo();
-        $grupo['nombre'] = $request->grupo;
-        $grupo['id_creador'] = auth()->user()->getAuthIdentifier();
-        $id_invitado = User::where('email', $request->amigo)->first()->id;
-        $grupo['id_invitado'] = $id_invitado;
+        $id_usuario = User::where('email', $request->amigo)->first()->id;
+        $id_grupo = Grupo::where('nombre', $request->grupo)->first()->id;
 
-        $grupo->save();
+        if (UsuarioGrupo::where('id_usuario', $id_usuario)->where('id_grupo', $id_grupo)->first() == null) {
+            $invitado = new UsuarioGrupo();
+            $invitado['id_usuario'] = $id_usuario;
+            $invitado['id_grupo'] = $id_grupo;
+            $invitado->save();
+        }
 
         return redirect()->to('/grupos');
     }
@@ -67,19 +69,36 @@ class GrupoController extends Controller
             'grupo' => 'required'
         ]);
 
-        $grupos = Grupo::where('nombre', $request->grupo)->get();
+        $idGrupo = Grupo::where('nombre', $request->grupo)->first()->id;
+        $usuariosGrupo = UsuarioGrupo::where('id_grupo', $idGrupo)->get();
 
-        foreach ($grupos as $grupo) {
-            if ($grupo->id_creador != $grupo->id_invitado) {
-                $message = new Message();
-                $message['emisor'] = User::where('id', $grupo->id_creador)->first()->email;
-                $message['receptor'] = User::find($grupo->id_invitado)->email;;
-                $message['texto'] = $request->mensaje;
-                $message['privado'] = 1;
-                $message->save();
-            }
+        foreach ($usuariosGrupo as $usuario) {
+            $message = new Message();
+            $message['emisor'] = User::find(auth()->user()->getAuthIdentifier())->email;
+            $message['receptor'] = User::find($usuario->id_usuario)->email;;
+            $message['texto'] = $request->mensaje;
+            $message['privado'] = 1;
+            $message->save();
         }
 
         return redirect()->to('/grupos');
     }
+
+    public function createGrupo($id)
+    {
+        $grupo = Grupo::find($id)->first();
+        $usuarios = UsuarioGrupo::where('id_grupo', $id)->get();
+
+        return view('grupoDetalle')
+            ->with('grupo', $grupo)
+            ->with('usuarios', $usuarios);
+    }
+
+    public function deleteInvitado($id_grupo, $id_usuario) {
+        $usuario_grupo = UsuarioGrupo::where('id_grupo', $id_grupo)->where('id_usuario', $id_usuario)->first();
+        $usuario_grupo->delete();
+
+        return redirect()->to('/grupo/' . $id_grupo);
+    }
+
 }

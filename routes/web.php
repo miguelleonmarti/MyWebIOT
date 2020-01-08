@@ -99,6 +99,10 @@ Route::get('/eliminarGrupo/{id}', 'GrupoController@deleteGrupo');
 
 Route::post('/enviarMensaje', 'GrupoController@enviarMensaje');
 
+Route::get('/grupo/{id}', 'GrupoController@createGrupo');
+
+Route::get('/eliminarInvitado/{id_grupo}/{id_usuario}', 'GrupoController@deleteInvitado');
+
 // FollowerController
 
 Route::get('/friends', 'FollowerController@create');

@@ -96,12 +96,12 @@
                 <div class="card-body">
                     @foreach ($grupos as $grupo)
                     @if ($grupo->nombre != "")
-                    <div class="card">
+                    <div class="card mt-2">
                         <div class="card-header">
-                            <form style="display: inline;" action="/eliminarGrupo/{{ $grupo->id }}" method="get">
+                            <h3 style="display: inline;"><a href="/grupo/{{ $grupo->id }}">{{$grupo->nombre}}</a></h3>
+                            <form style="display: inline;" class="float-right" action="/eliminarGrupo/{{ $grupo->id }}" method="get">
                                 <button class="btn btn-danger" type="submit">Eliminar grupo</button>
                             </form>
-                            <h3 style="display: inline;"><a href="/grupo/{{ $grupo->id }}"></a>{{$grupo->nombre}}</h3>
                         </div>
                     </div>
                     @endif

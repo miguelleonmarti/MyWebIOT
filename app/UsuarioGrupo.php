@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
 
-class Grupo extends Model
+class UsuarioGrupo extends Model
 {
     use Notifiable;
 
-    protected $table = 'grupos';
-    protected $fillable = ['nombre', 'id_creador'];
+    protected $table = 'usuario_grupo';
+    protected $fillable = ['id_grupo', 'id_usuario'];
 }
