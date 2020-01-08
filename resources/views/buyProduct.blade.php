@@ -4,7 +4,7 @@
 
 @section('body')
 
-@if (isset($productos) && auth()->check())
+@if (isset($productos))
 @foreach ($productos->chunk(3) as $chunk)
 <!-- Number of rows -->
 

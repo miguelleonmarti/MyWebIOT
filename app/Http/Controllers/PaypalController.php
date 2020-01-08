@@ -114,6 +114,7 @@ class PaypalController extends Controller
         Session::put('error', 'There was a problem processing your payment. Please contact support.');
         return Redirect::to('/');
     }
+
     public function getPaymentStatus()
     {
         $paymentId = Session::get('paypalPaymentId');
@@ -162,6 +163,11 @@ class PaypalController extends Controller
                 $producto = Producto::find($item->id);
                 $producto['cantidad'] -= $item->qty;
                 $producto->save();
+            }
+
+            $elementos = Carrito::where('id_user', '=', auth()->user()->getAuthIdentifier())->get();
+            foreach ($elementos as $elemento) {
+                $elemento->delete();
             }
 
             Cart::destroy();

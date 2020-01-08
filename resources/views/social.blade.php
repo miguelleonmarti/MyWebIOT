@@ -58,6 +58,7 @@
             <a href="/newMessage" role="button" class="btn btn-outline-primary btn-lg btn-block">Mensajes</a>
             <a href="/membersChannels" role="button" class="btn btn-outline-primary btn-lg btn-block">Canales</a>
             <a href="/profile" role="button" class="btn btn-outline-primary btn-lg btn-block">Perfil</a>
+            <a href="/grupos" role="button" class="btn btn-outline-primary btn-lg btn-block">Grupos</a>
         </div>
     </div>
     <div class="row mt-4">

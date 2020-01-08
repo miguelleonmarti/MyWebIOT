@@ -87,6 +87,18 @@ Route::get('/newMessage', 'SocialController@createMessage');
 
 Route::post('/newMessage', 'SocialController@newMessage');
 
+// GrupoController
+
+Route::get('/grupos', 'GrupoController@create');
+
+Route::post('/addGrupo', 'GrupoController@addGrupo');
+
+Route::post('/addInvitado', 'GrupoController@addInvitado');
+
+Route::get('/eliminarGrupo/{id}', 'GrupoController@deleteGrupo');
+
+Route::post('/enviarMensaje', 'GrupoController@enviarMensaje');
+
 // FollowerController
 
 Route::get('/friends', 'FollowerController@create');
@@ -124,3 +136,5 @@ Route::delete('/destroy', 'WebstoreController@destroyCart');
 Route::get('/checkout', 'PaypalController@payWithpaypal');
 
 Route::get('/status', 'PaypalController@getPaymentStatus');
+
+

@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Carrito;
+use App\Producto;
 use Illuminate\Http\Request;
+use Gloudemans\Shoppingcart\Cart;
 
 class SessionsController extends Controller
 {
@@ -19,6 +22,14 @@ class SessionsController extends Controller
             ]);
         }
 
+        $elementos = Carrito::where('id_user', '=', auth()->user()->getAuthIdentifier())->get();
+
+        foreach ($elementos as $elemento) {
+            $producto = Producto::find($elemento->id_producto);
+            \Cart::add($producto->id, $producto->nombre, 1, $producto->precio);
+        }
+
+
         return redirect()->to('/');
 
     }
@@ -26,6 +37,8 @@ class SessionsController extends Controller
     public function destroy()
     {
         auth()->logout();
+
+        \Cart::destroy();
 
         return redirect()->to('/');
     }

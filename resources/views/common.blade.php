@@ -35,10 +35,10 @@
                                 href="/channelList">Canales</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="/support">Atención al
                                 Cliente</a></li>
-                        @if(auth()->check())
+
                         <li class="nav-item" role="presentation"><a class="nav-link active" href="/buyProduct">Compra
                                 productos</a></li>
-                        @endif
+
                         <!-- Changes the href of channels if logged in -->
                     </ul>
                     <ul class="nav navbar-nav ml-auto align-items-md-center">
