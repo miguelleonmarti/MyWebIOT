@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>MyWebIoT: @yield('title')</title>
+    <title>MyWebIoT: @yield('title') - Miguel Á. León Martí - 2019/2020</title>
 
     <link rel="stylesheet" href="/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fonts/ionicons.min.css">
